@@ -442,61 +442,61 @@
             <div id="proyectos" class="section active">
                 <div class="gallery">
                     <div class="gallery-item huge" onclick="showProject('creatures')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Creatures/Xolotl/Ilustración83.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/creatures/xolotl/ilustración83.png');">
                             <h3>Creatures</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item tall" onclick="showProject('dragon')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Dragon/Dragon.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/dragon/dragon.png');">
                             <h3>Dragon</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item tall" onclick="showProject('explorer')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Explorer/Ilustración78.jpg');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/explorer/ilustración78.jpg');">
                             <h3>Explorer</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('forging-mann')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Forging mann/cover ex.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/forging-mann/coverex.png');">
                             <h3>Forging Mann</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('oma')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg');">
                             <h3>Oma</h3>
                         </div>
                     </div>
                     
                     <div class="gallery-item wide" onclick="showProject('matan-card-game')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/matan-card-game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg');">
                             <h3>Matan Card Game</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('oz')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Oz/Son of Oz 2.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/oz/sonofoz2.png');">
                             <h3>Oz</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('proyectile')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png');">
                             <h3>Proyectile</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('selena-ii')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Selena II/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/selena-ii/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png');">
                             <h3>Selena II</h3>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('selena-magica-somnia')">
-                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Selena Magica Somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png');">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/selena-magica-somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png');">
                             <h3>Selena Magica Somnia</h3>
                         </div>
                     </div>
@@ -510,7 +510,7 @@
                     
                     <div class="profile-section">
                         <div class="profile-photo">
-                            <img src="../assets/Perfil.jpg" alt="Foto del ilustrador" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                            <img src="../assets/perfil.jpg" alt="Foto del ilustrador" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
                         </div>
                     </div>
                     
@@ -635,226 +635,192 @@
     </div>
 
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
+    const projectImages = {
+        'creatures': [
+            '../assets/portfolio/creatures/fenix/fenix.png',
+            '../assets/portfolio/creatures/fenix/ilustración106.jpg',
+            '../assets/portfolio/creatures/fenix/proyecto (20240513060316).jpg',
+            '../assets/portfolio/creatures/kitsune/46128039-bb1e-4390-aa15-1605a476b11f_rw_1920.jpg',
+            '../assets/portfolio/creatures/kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
+            '../assets/portfolio/creatures/kitsune/a12eb426-146e-4ca2-a4d8-a0f7ee2087ae_rw_3840.jpg',
+            '../assets/portfolio/creatures/kitsune/bbd4ea0d-dcf6-4f82-b613-9eb12b00370f_rw_3840.jpg',
+            '../assets/portfolio/creatures/xolotl/ilustración83.png',
+            '../assets/portfolio/creatures/xolotl/354521dd-5db2-45bf-b07a-c8c0c15d5f07_rw_3840.jpg',
+            '../assets/portfolio/creatures/xolotl/9357e301-aae3-4a0b-982a-01b6b1bfaa89_rw_3840.jpg'
+        ],
+        'dragon': [
+            '../assets/portfolio/dragon/dragon.png',
+            '../assets/portfolio/dragon/ilustración93.jpg',
+            '../assets/portfolio/dragon/ilustración932.jpg'
+        ],
+        'explorer': [
+            '../assets/portfolio/explorer/ilustración78.jpg',
+            '../assets/portfolio/explorer/51244a16-b2da-4dc9-96c3-3e9a794a3f95_rw_3840.jpg',
+            '../assets/portfolio/explorer/5db407b3-e82c-4964-87f7-9b8ec0ac6013_rw_3840.jpg'
+        ],
+        'forging-mann': [
+            '../assets/portfolio/forging-mann/coverex.png',
+            '../assets/portfolio/forging-mann/finalcover.png',
+            '../assets/portfolio/forging-mann/mockup.png'
+        ],
+        'oma': [
+            '../assets/portfolio/oma/3da1a9fb-a5f2-49df-96e2-520aede16963_rw_1920.jpg',
+            '../assets/portfolio/oma/4f68f532-1494-4e7b-8903-ee7d37d2a8da_rw_1920.png',
+            '../assets/portfolio/oma/5137db57-c4e7-4099-8068-841ccfabbcaf_rw_1920.png',
+            '../assets/portfolio/oma/5c939020-adeb-41a7-aea9-2cbcc316e356_rw_1920.jpg',
+            '../assets/portfolio/oma/65299efd-bd0f-4e61-a765-a99efe14c9bd_rw_1920.jpg',
+            '../assets/portfolio/oma/75093e8e-dd14-42dc-ae80-917dba110981_rw_1920.jpg',
+            '../assets/portfolio/oma/87aaf6f8-5784-40f7-8ae2-d5f656dbffc4_rw_1920.jpg',
+            '../assets/portfolio/oma/a1fcf6eb-1ad6-44da-a6e5-6da3d0be8e8a_rw_1920.jpg',
+            '../assets/portfolio/oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg'
+        ],
+        'matan-card-game': [
+            '../assets/portfolio/matan-card-game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg',
+            '../assets/portfolio/matan-card-game/62e5b258-7608-4676-b550-48cc2d8ab387_rw_1920.png',
+            '../assets/portfolio/matan-card-game/88353718-2233-4107-b5c9-07580ef62e25_rw_1920.png',
+            '../assets/portfolio/matan-card-game/ba051827-2402-4782-a635-0bed11e51298_rw_1920.png',
+            '../assets/portfolio/matan-card-game/c24637e7-e8a6-48c2-af51-d49078b0078a_rw_1920.png'
+        ],
+        'oz': [
+            '../assets/portfolio/oz/sonofoz2.png'
+        ],
+        'proyectile': [
+            '../assets/portfolio/proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png',
+            '../assets/portfolio/proyectile/2441a960-6e29-44d6-97b9-bd4cfe716609_rw_1920.png',
+            '../assets/portfolio/proyectile/4beae567-0a09-4ad7-9e35-224f178d2d32_rw_1920.png',
+            '../assets/portfolio/proyectile/75471a91-bac5-48c8-bdea-5f41dd833554_rw_1920.png',
+            '../assets/portfolio/proyectile/ilustración91.png'
+        ],
+        'selena-ii': [
+            '../assets/portfolio/selena-ii/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png',
+            '../assets/portfolio/selena-ii/c07c104e-67a6-4b9a-93f2-669084f0d22b_rw_1920.jpg',
+            '../assets/portfolio/selena-ii/cover2.png',
+            '../assets/portfolio/selena-ii/cover2front.png'
+        ],
+        'selena-magica-somnia': [
+            '../assets/portfolio/selena-magica-somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png',
+            '../assets/portfolio/selena-magica-somnia/225fb095-23cc-42e6-b6f7-6745473354d4_rw_1920.png',
+            '../assets/portfolio/selena-magica-somnia/concept1.jpg',
+            '../assets/portfolio/selena-magica-somnia/concept2.jpg',
+            '../assets/portfolio/selena-magica-somnia/concept3.jpg',
+            '../assets/portfolio/selena-magica-somnia/concept4.jpg',
+            '../assets/portfolio/selena-magica-somnia/cover1c.png',
+            '../assets/portfolio/selena-magica-somnia/e354dfe8-c88f-44f2-b8e7-24c4fb0b004f_rw_1920.jpg'
+        ]
+    };
 
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-
-            // Update active nav link
-            const navLinks = document.querySelectorAll('.nav-links a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Set active nav link based on section
-            if (sectionId === 'proyectos') {
-                document.querySelector('[onclick="showSection(\'proyectos\')"]').classList.add('active');
-            } else if (sectionId === 'about') {
-                document.querySelector('[onclick="showSection(\'about\')"]').classList.add('active');
-            }
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        if (sectionId === 'proyectos') {
+            document.querySelector('[onclick="showSection(\'proyectos\')"]').classList.add('active');
+        } else if (sectionId === 'about') {
+            document.querySelector('[onclick="showSection(\'about\')"]').classList.add('active');
         }
+    }
 
-        function showProject(projectId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Show project detail section
-            const projectSection = document.getElementById('project-' + projectId);
-            if (projectSection) {
-                // Si existe sección detallada, la mostramos y actualizamos imágenes si corresponde
-                const images = projectImages[projectId];
-                if (images && projectSection.querySelector('.project-images')) {
-                    const imagesContainer = projectSection.querySelector('.project-images');
-                    imagesContainer.innerHTML = images.map(src => `
-                        <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
-                    `).join('');
-                }
-                projectSection.classList.add('active');
-            } else {
-                // Si no existe, muestra la genérica
-                showGenericProject(projectId);
-            }
-        }
-
-        function showGenericProject(projectId) {
-            // For projects without detailed sections, show a placeholder
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Create or show a generic project view
-            let genericSection = document.getElementById('generic-project');
-            if (!genericSection) {
-                genericSection = document.createElement('div');
-                genericSection.id = 'generic-project';
-                genericSection.className = 'section';
-                document.querySelector('.container').appendChild(genericSection);
-            }
-
-            // Update content based on project
-            const projectTitles = {
-                'forging-mann': 'Forging Mann',
-                'matan-card-game': 'Matan Card Game',
-                'oma': 'Oma',
-                'oz': 'Oz',
-                'proyectile': 'Proyectile',
-                'selena-ii': 'Selena II',
-                'selena-magica-somnia': 'Selena Magica Somnia'
-            };
-
-            const projectDescriptions = {
-                'forging-mann': 'Maestros herreros y artesanos',
-                'matan-card-game': 'Ilustraciones para juego de cartas',
-                'oma': 'Personajes únicos y expresivos',
-                'oz': 'Mundo mágico de Oz reimaginado',
-                'proyectile': 'Armas y proyectiles fantásticos',
-                'selena-ii': 'Continuación de la saga Selena',
-                'selena-magica-somnia': 'Mundo onírico y mágico de Selena'
-            };
-
-            // Si hay imágenes, muéstralas, si no, muestra los SVGs de ejemplo
+    function showProject(projectId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        const projectSection = document.getElementById('project-' + projectId);
+        if (projectSection) {
             const images = projectImages[projectId];
-            let imagesHtml = '';
-            if (images && images.length > 0) {
-                imagesHtml = images.map(src => `
+            if (images && projectSection.querySelector('.project-images')) {
+                const imagesContainer = projectSection.querySelector('.project-images');
+                imagesContainer.innerHTML = images.map(src => `
                     <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
                 `).join('');
-            } else {
-                imagesHtml = `
-                    <div class="project-image">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
-                        </svg>
-                        <h3>Ilustración Principal</h3>
-                        <p>Obra destacada del proyecto</p>
-                    </div>
-                    <div class="project-image">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
-                        </svg>
-                        <h3>Bocetos Conceptuales</h3>
-                        <p>Proceso creativo inicial</p>
-                    </div>
-                    <div class="project-image">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
-                        </svg>
-                        <h3>Versión Final</h3>
-                        <p>Resultado completado</p>
-                    </div>
-                `;
             }
+            projectSection.classList.add('active');
+        } else {
+            showGenericProject(projectId);
+        }
+    }
 
-            genericSection.innerHTML = `
-                <div class="project-detail">
-                    <button class="back-button" onclick="showSection('proyectos')">← Volver a Proyectos</button>
-                    <div class="project-header">
-                        <h2>${projectTitles[projectId] || projectId}</h2>
-                        <p>${projectDescriptions[projectId] || 'Proyecto de ilustración'}</p>
-                    </div>
-                    <div class="project-images">
-                        ${imagesHtml}
-                    </div>
+    function showGenericProject(projectId) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        let genericSection = document.getElementById('generic-project');
+        if (!genericSection) {
+            genericSection = document.createElement('div');
+            genericSection.id = 'generic-project';
+            genericSection.className = 'section';
+            document.querySelector('.container').appendChild(genericSection);
+        }
+        const projectTitles = {
+            'forging-mann': 'Forging Mann',
+            'matan-card-game': 'Matan Card Game',
+            'oma': 'Oma',
+            'oz': 'Oz',
+            'proyectile': 'Proyectile',
+            'selena-ii': 'Selena II',
+            'selena-magica-somnia': 'Selena Magica Somnia'
+        };
+        const projectDescriptions = {
+            'forging-mann': 'Maestros herreros y artesanos',
+            'matan-card-game': 'Ilustraciones para juego de cartas',
+            'oma': 'Personajes únicos y expresivos',
+            'oz': 'Mundo mágico de Oz reimaginado',
+            'proyectile': 'Armas y proyectiles fantásticos',
+            'selena-ii': 'Continuación de la saga Selena',
+            'selena-magica-somnia': 'Mundo onírico y mágico de Selena'
+        };
+        const images = projectImages[projectId];
+        let imagesHtml = '';
+        if (images && images.length > 0) {
+            imagesHtml = images.map(src => `
+                <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
+            `).join('');
+        } else {
+            imagesHtml = `
+                <div class="project-image">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                    </svg>
+                    <h3>Ilustración Principal</h3>
+                    <p>Obra destacada del proyecto</p>
+                </div>
+                <div class="project-image">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                    </svg>
+                    <h3>Bocetos Conceptuales</h3>
+                    <p>Proceso creativo inicial</p>
+                </div>
+                <div class="project-image">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                    </svg>
+                    <h3>Versión Final</h3>
+                    <p>Resultado completado</p>
                 </div>
             `;
-
-            genericSection.classList.add('active');
         }
-
-        // Add hover effects to gallery items
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
+        genericSection.innerHTML = `
+            <div class="project-detail">
+                <button class="back-button" onclick="showSection('proyectos')">← Volver a Proyectos</button>
+                <div class="project-header">
+                    <h2>${projectTitles[projectId] || projectId}</h2>
+                    <p>${projectDescriptions[projectId] || 'Proyecto de ilustración'}</p>
+                </div>
+                <div class="project-images">
+                    ${imagesHtml}
+                </div>
+            </div>
+        `;
+        genericSection.classList.add('active');
+    }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986e700b10ac2fce',t:'MTc1OTE3OTkxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>
-const projectImages = {
-    'creatures': [
-        '../assets/portfolio/Creatures/Fenix/Fenix.png',
-        '../assets/portfolio/Creatures/Fenix/Ilustración106.jpg',
-        '../assets/portfolio/Creatures/Fenix/Proyecto (20240513060316).jpg',
-        '../assets/portfolio/Creatures/Kitsune/46128039-bb1e-4390-aa15-1605a476b11f_rw_1920.jpg',
-        '../assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
-        '../assets/portfolio/Creatures/Kitsune/a12eb426-146e-4ca2-a4d8-a0f7ee2087ae_rw_3840.jpg',
-        '../assets/portfolio/Creatures/Xolotl/Ilustración83.png',
-        '../assets/portfolio/Creatures/Xolotl/354521dd-5db2-45bf-b07a-c8c0c15d5f07_rw_3840.jpg',
-        '../assets/portfolio/Creatures/Xolotl/9357e301-aae3-4a0b-982a-01b6b1bfaa89_rw_3840.jpg'
-    ],
-    'dragon': [
-        '../assets/portfolio/Dragon/Dragon.png',
-        '../assets/portfolio/Dragon/Ilustración93.jpg',
-        '../assets/portfolio/Dragon/Ilustración932.jpg'
-    ],
-    'explorer': [
-        '../assets/portfolio/Explorer/Ilustración78.jpg',
-        '../assets/portfolio/Explorer/51244a16-b2da-4dc9-96c3-3e9a794a3f95_rw_3840.jpg',
-        '../assets/portfolio/Explorer/5db407b3-e82c-4964-87f7-9b8ec0ac6013_rw_3840.jpg'
-    ],
-    'forging-mann': [
-        '../assets/portfolio/Forging mann/cover ex.png',
-        '../assets/portfolio/Forging mann/Final Cover CMYK - high sat and contrast.png',
-        '../assets/portfolio/Forging mann/mockup.png'
-    ],
-    'oma': [
-        '../assets/portfolio/Oma/3da1a9fb-a5f2-49df-96e2-520aede16963_rw_1920.jpg',
-        '../assets/portfolio/Oma/4f68f532-1494-4e7b-8903-ee7d37d2a8da_rw_1920.png',
-        '../assets/portfolio/Oma/5137db57-c4e7-4099-8068-841ccfabbcaf_rw_1920.png',
-        '../assets/portfolio/Oma/5c939020-adeb-41a7-aea9-2cbcc316e356_rw_1920.jpg',
-        '../assets/portfolio/Oma/65299efd-bd0f-4e61-a765-a99efe14c9bd_rw_1920.jpg',
-        '../assets/portfolio/Oma/75093e8e-dd14-42dc-ae80-917dba110981_rw_1920.jpg',
-        '../assets/portfolio/Oma/87aaf6f8-5784-40f7-8ae2-d5f656dbffc4_rw_1920.jpg',
-        '../assets/portfolio/Oma/a1fcf6eb-1ad6-44da-a6e5-6da3d0be8e8a_rw_1920.jpg',
-        '../assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg'
-    ],
-    'matan-card-game': [
-        '../assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg',
-        '../assets/portfolio/Matan card game/62e5b258-7608-4676-b550-48cc2d8ab387_rw_1920.png',
-        '../assets/portfolio/Matan card game/88353718-2233-4107-b5c9-07580ef62e25_rw_1920.png',
-        '../assets/portfolio/Matan card game/ba051827-2402-4782-a635-0bed11e51298_rw_1920.png',
-        '../assets/portfolio/Matan card game/c24637e7-e8a6-48c2-af51-d49078b0078a_rw_1920.png'
-    ],
-    'oz': [
-        '../assets/portfolio/Oz/Son of Oz 2.png'
-    ],
-    'proyectile': [
-        '../assets/portfolio/Proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png',
-        '../assets/portfolio/Proyectile/2441a960-6e29-44d6-97b9-bd4cfe716609_rw_1920.png',
-        '../assets/portfolio/Proyectile/4beae567-0a09-4ad7-9e35-224f178d2d32_rw_1920.png',
-        '../assets/portfolio/Proyectile/75471a91-bac5-48c8-bdea-5f41dd833554_rw_1920.png',
-        '../assets/portfolio/Proyectile/Ilustración91.png'
-    ],
-    'selena-ii': [
-        '../assets/portfolio/Selena II/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png',
-        '../assets/portfolio/Selena II/c07c104e-67a6-4b9a-93f2-669084f0d22b_rw_1920.jpg',
-        '../assets/portfolio/Selena II/Cover 2 - RGB.png',
-        '../assets/portfolio/Selena II/cover 2 front.png'
-    ],
-    'selena-magica-somnia': [
-        '../assets/portfolio/Selena Magica Somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png',
-        '../assets/portfolio/Selena Magica Somnia/225fb095-23cc-42e6-b6f7-6745473354d4_rw_1920.png',
-        '../assets/portfolio/Selena Magica Somnia/Concept 1.jpg',
-        '../assets/portfolio/Selena Magica Somnia/Concept 2.jpg',
-        '../assets/portfolio/Selena Magica Somnia/Concept 3.jpg',
-        '../assets/portfolio/Selena Magica Somnia/Concept 4.jpg',
-        '../assets/portfolio/Selena Magica Somnia/Cover 1 21X16.png',
-        '../assets/portfolio/Selena Magica Somnia/e354dfe8-c88f-44f2-b8e7-24c4fb0b004f_rw_1920.jpg'
-    ]
-};
-</script>
 </body>
 </html>
