@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Ilustrador</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #667eea;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: #2d3748;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 200px;
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .gallery-item.huge {
+            grid-column: span 2;
+            grid-row: span 4;
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item.tall {
+            grid-row: span 2;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        .gallery-content {
+            padding: 0;
+            height: 100%;
+            min-height: 200px;
+            min-width: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            text-align: left;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: none;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .gallery-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(30,30,30,0.7) 60%, rgba(30,30,30,0.0) 100%);
+            z-index: 1;
+        }
+
+        .gallery-content h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0 0 0.3rem 0;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            z-index: 2;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            padding-top: 0.7rem;
+        }
+
+        .gallery-content p {
+            font-size: 1rem;
+            opacity: 0.95;
+            color: #e0e0e0;
+            margin: 0 0 1.2rem 0;
+            z-index: 2;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+            padding-bottom: 0.7rem;
+        }
+
+        .gallery-item,
+        .gallery-item.large .gallery-content,
+        .gallery-item.tall .gallery-content,
+        .gallery-item.wide .gallery-content {
+            height: 100%;
+            min-height: 200px;
+        }
+
+        /* About Section */
+        .about-content {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-content h2 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            color: #2d3748;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        /* Profile Photo Section */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 4px solid #ffffff;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #6c757d;
+            border: 2px dashed #dee2e6;
+            border-radius: 50%;
+        }
+
+        .photo-placeholder svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-placeholder p {
+            font-size: 0.9rem;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Project Detail Section */
+        .project-detail {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .project-header h2 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .back-button {
+            background: #2d3748;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #4a5568;
+        }
+
+        .project-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-image {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #e9ecef;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image svg {
+            width: 80px;
+            height: 80px;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+
+        /* Image Overlay for project images */
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #2d3748;
+        }
+
+        .image-overlay h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .gallery-item,
+            .gallery-item.huge,
+            .gallery-item.large,
+            .gallery-item.tall,
+            .gallery-item.wide {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.large,
+            .gallery-item.wide {
+                grid-column: span 1;
+            }
+
+            .about-content {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Mi Portafolio</a>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('proyectos')" class="active">Proyectos</a></li>
+                <li><a href="#" onclick="showSection('about')">Acerca de mí</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero">
+                <h1>WolferDraw</h1>
+                <p>Ilustrador Creativo</p>
+                <p style="margin-top: 0.5rem; opacity: 0.6;">Transformando ideas en arte visual con pasión y creatividad</p>
+            </div>
+
+            <!-- Projects Section -->
+            <div id="proyectos" class="section active">
+                <div class="gallery">
+                    <div class="gallery-item huge" onclick="showProject('creatures')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Creatures/Xolotl/Ilustración83.png');">
+                            <h3>Creatures</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item tall" onclick="showProject('dragon')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Dragon/Dragon.png');">
+                            <h3>Dragon</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item tall" onclick="showProject('explorer')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Explorer/Ilustración78.jpg');">
+                            <h3>Explorer</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('forging-mann')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Forging mann/cover ex.png');">
+                            <h3>Forging Mann</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('oma')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg');">
+                            <h3>Oma</h3>
+                        </div>
+                    </div>
+                    
+                    <div class="gallery-item wide" onclick="showProject('matan-card-game')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg');">
+                            <h3>Matan Card Game</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('oz')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Oz/Son of Oz 2.png');">
+                            <h3>Oz</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('proyectile')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png');">
+                            <h3>Proyectile</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('selena-ii')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Selena II/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png');">
+                            <h3>Selena II</h3>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('selena-magica-somnia')">
+                        <div class="gallery-content" style="background-image: url('../assets/portfolio/Selena Magica Somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png');">
+                            <h3>Selena Magica Somnia</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div id="about" class="section">
+                <div class="about-content">
+                    <h2>Acerca de mí</h2>
+                    
+                    <div class="profile-section">
+                        <div class="profile-photo">
+                            <img src="../assets/Perfil.jpg" alt="Foto del ilustrador" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+                        </div>
+                    </div>
+                    
+                    <div class="about-text">
+                        <p>Soy un ilustrador apasionado con más de 5 años de experiencia creando arte visual que cuenta historias. Mi trabajo se centra en la ilustración digital, el concept art y el diseño de personajes, siempre buscando transmitir emociones a través del color y la forma.</p>
+                        
+                        <p>Me especializo en técnicas mixtas que combinan lo tradicional con lo digital, creando piezas únicas que capturan la imaginación del espectador. Cada proyecto es una oportunidad para explorar nuevas narrativas visuales.</p>
+                    </div>
+
+                    <div class="skills">
+                        <div class="skill-item">
+                            <h3>🎨 Ilustración Digital</h3>
+                            <p>Photoshop, Procreate, Illustrator</p>
+                        </div>
+                        <div class="skill-item">
+                            <h3>✏️ Concept Art</h3>
+                            <p>Diseño de personajes y ambientes</p>
+                        </div>
+                        <div class="skill-item">
+                            <h3>🖌️ Técnicas Mixtas</h3>
+                            <p>Acuarela, tinta y digital</p>
+                        </div>
+                        <div class="skill-item">
+                            <h3>📚 Narrativa Visual</h3>
+                            <p>Storyboard e ilustración editorial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Detail Sections -->
+            <div id="project-creatures" class="section">
+                <div class="project-detail">
+                    <button class="back-button" onclick="showSection('proyectos')">← Volver a Proyectos</button>
+                    <div class="project-header">
+                        <h2>Creatures</h2>
+                        <p>Criaturas fantásticas y mitológicas</p>
+                    </div>
+                    <div class="project-images">
+                        <div class="project-image" style="background-image: url('https://drive.google.com/uc?id=1YcrNN5iDLCsLrxQ-uxzMPWLejYtS0Vqv'); background-size: cover; background-position: center;">
+                            <div class="image-overlay">
+                                <h3>Portada Principal</h3>
+                                <p>Criaturas fantásticas</p>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                            <h3>Espíritu Acuático</h3>
+                            <p>Ser elemental del agua</p>
+                        </div>
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                            </svg>
+                            <h3>Fénix Dorado</h3>
+                            <p>Ave legendaria renacida</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="project-dragon" class="section">
+                <div class="project-detail">
+                    <button class="back-button" onclick="showSection('proyectos')">← Volver a Proyectos</button>
+                    <div class="project-header">
+                        <h2>Dragon</h2>
+                        <p>Dragones épicos y majestuosos</p>
+                    </div>
+                    <div class="project-images">
+                        <div class="project-image" style="background-image: url('https://drive.google.com/uc?id=1CS4l8A9cUIa-s6WDGiShg_s42OOxgWuR'); background-size: cover; background-position: center;">
+                            <div class="image-overlay">
+                                <h3>Portada Principal</h3>
+                                <p>Dragones épicos</p>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <h3>Dragón de Hielo</h3>
+                            <p>Guardián del norte helado</p>
+                        </div>
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                            <h3>Dragón Ancestral</h3>
+                            <p>Sabiduría milenaria</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional project sections would follow the same pattern -->
+            <div id="project-explorer" class="section">
+                <div class="project-detail">
+                    <button class="back-button" onclick="showSection('proyectos')">← Volver a Proyectos</button>
+                    <div class="project-header">
+                        <h2>Explorer</h2>
+                        <p>Aventureros en mundos desconocidos</p>
+                    </div>
+                    <div class="project-images">
+                        <div class="project-image" style="background-image: url('https://drive.google.com/uc?id=1ih6misToZtrwb2Nq-TvkZc9ZrPVh9O9p'); background-size: cover; background-position: center;">
+                            <div class="image-overlay">
+                                <h3>Portada Principal</h3>
+                                <p>Aventureros exploradores</p>
+                            </div>
+                        </div>
+                        <div class="project-image">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                            <h3>Navegante Estelar</h3>
+                            <p>Viajero entre dimensiones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Set active nav link based on section
+            if (sectionId === 'proyectos') {
+                document.querySelector('[onclick="showSection(\'proyectos\')"]').classList.add('active');
+            } else if (sectionId === 'about') {
+                document.querySelector('[onclick="showSection(\'about\')"]').classList.add('active');
+            }
+        }
+
+        function showProject(projectId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show project detail section
+            const projectSection = document.getElementById('project-' + projectId);
+            if (projectSection) {
+                // Si existe sección detallada, la mostramos y actualizamos imágenes si corresponde
+                const images = projectImages[projectId];
+                if (images && projectSection.querySelector('.project-images')) {
+                    const imagesContainer = projectSection.querySelector('.project-images');
+                    imagesContainer.innerHTML = images.map(src => `
+                        <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
+                    `).join('');
+                }
+                projectSection.classList.add('active');
+            } else {
+                // Si no existe, muestra la genérica
+                showGenericProject(projectId);
+            }
+        }
+
+        function showGenericProject(projectId) {
+            // For projects without detailed sections, show a placeholder
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Create or show a generic project view
+            let genericSection = document.getElementById('generic-project');
+            if (!genericSection) {
+                genericSection = document.createElement('div');
+                genericSection.id = 'generic-project';
+                genericSection.className = 'section';
+                document.querySelector('.container').appendChild(genericSection);
+            }
+
+            // Update content based on project
+            const projectTitles = {
+                'forging-mann': 'Forging Mann',
+                'matan-card-game': 'Matan Card Game',
+                'oma': 'Oma',
+                'oz': 'Oz',
+                'proyectile': 'Proyectile',
+                'selena-ii': 'Selena II',
+                'selena-magica-somnia': 'Selena Magica Somnia'
+            };
+
+            const projectDescriptions = {
+                'forging-mann': 'Maestros herreros y artesanos',
+                'matan-card-game': 'Ilustraciones para juego de cartas',
+                'oma': 'Personajes únicos y expresivos',
+                'oz': 'Mundo mágico de Oz reimaginado',
+                'proyectile': 'Armas y proyectiles fantásticos',
+                'selena-ii': 'Continuación de la saga Selena',
+                'selena-magica-somnia': 'Mundo onírico y mágico de Selena'
+            };
+
+            // Si hay imágenes, muéstralas, si no, muestra los SVGs de ejemplo
+            const images = projectImages[projectId];
+            let imagesHtml = '';
+            if (images && images.length > 0) {
+                imagesHtml = images.map(src => `
+                    <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
+                `).join('');
+            } else {
+                imagesHtml = `
+                    <div class="project-image">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                        </svg>
+                        <h3>Ilustración Principal</h3>
+                        <p>Obra destacada del proyecto</p>
+                    </div>
+                    <div class="project-image">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                        </svg>
+                        <h3>Bocetos Conceptuales</h3>
+                        <p>Proceso creativo inicial</p>
+                    </div>
+                    <div class="project-image">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                        </svg>
+                        <h3>Versión Final</h3>
+                        <p>Resultado completado</p>
+                    </div>
+                `;
+            }
+
+            genericSection.innerHTML = `
+                <div class="project-detail">
+                    <button class="back-button" onclick="showSection('proyectos')">← Volver a Proyectos</button>
+                    <div class="project-header">
+                        <h2>${projectTitles[projectId] || projectId}</h2>
+                        <p>${projectDescriptions[projectId] || 'Proyecto de ilustración'}</p>
+                    </div>
+                    <div class="project-images">
+                        ${imagesHtml}
+                    </div>
+                </div>
+            `;
+
+            genericSection.classList.add('active');
+        }
+
+        // Add hover effects to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986e700b10ac2fce',t:'MTc1OTE3OTkxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+<script>
+const projectImages = {
+    'creatures': [
+        '../assets/portfolio/Creatures/Fenix/Fenix.png',
+        '../assets/portfolio/Creatures/Fenix/Ilustración106.jpg',
+        '../assets/portfolio/Creatures/Fenix/Proyecto (20240513060316).jpg',
+        '../assets/portfolio/Creatures/Kitsune/46128039-bb1e-4390-aa15-1605a476b11f_rw_1920.jpg',
+        '../assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
+        '../assets/portfolio/Creatures/Kitsune/a12eb426-146e-4ca2-a4d8-a0f7ee2087ae_rw_3840.jpg',
+        '../assets/portfolio/Creatures/Xolotl/Ilustración83.png',
+        '../assets/portfolio/Creatures/Xolotl/354521dd-5db2-45bf-b07a-c8c0c15d5f07_rw_3840.jpg',
+        '../assets/portfolio/Creatures/Xolotl/9357e301-aae3-4a0b-982a-01b6b1bfaa89_rw_3840.jpg'
+    ],
+    'dragon': [
+        '../assets/portfolio/Dragon/Dragon.png',
+        '../assets/portfolio/Dragon/Ilustración93.jpg',
+        '../assets/portfolio/Dragon/Ilustración932.jpg'
+    ],
+    'explorer': [
+        '../assets/portfolio/Explorer/Ilustración78.jpg',
+        '../assets/portfolio/Explorer/51244a16-b2da-4dc9-96c3-3e9a794a3f95_rw_3840.jpg',
+        '../assets/portfolio/Explorer/5db407b3-e82c-4964-87f7-9b8ec0ac6013_rw_3840.jpg'
+    ],
+    'forging-mann': [
+        '../assets/portfolio/Forging mann/cover ex.png',
+        '../assets/portfolio/Forging mann/Final Cover CMYK - high sat and contrast.png',
+        '../assets/portfolio/Forging mann/mockup.png'
+    ],
+    'oma': [
+        '../assets/portfolio/Oma/3da1a9fb-a5f2-49df-96e2-520aede16963_rw_1920.jpg',
+        '../assets/portfolio/Oma/4f68f532-1494-4e7b-8903-ee7d37d2a8da_rw_1920.png',
+        '../assets/portfolio/Oma/5137db57-c4e7-4099-8068-841ccfabbcaf_rw_1920.png',
+        '../assets/portfolio/Oma/5c939020-adeb-41a7-aea9-2cbcc316e356_rw_1920.jpg',
+        '../assets/portfolio/Oma/65299efd-bd0f-4e61-a765-a99efe14c9bd_rw_1920.jpg',
+        '../assets/portfolio/Oma/75093e8e-dd14-42dc-ae80-917dba110981_rw_1920.jpg',
+        '../assets/portfolio/Oma/87aaf6f8-5784-40f7-8ae2-d5f656dbffc4_rw_1920.jpg',
+        '../assets/portfolio/Oma/a1fcf6eb-1ad6-44da-a6e5-6da3d0be8e8a_rw_1920.jpg',
+        '../assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg'
+    ],
+    'matan-card-game': [
+        '../assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg',
+        '../assets/portfolio/Matan card game/62e5b258-7608-4676-b550-48cc2d8ab387_rw_1920.png',
+        '../assets/portfolio/Matan card game/88353718-2233-4107-b5c9-07580ef62e25_rw_1920.png',
+        '../assets/portfolio/Matan card game/ba051827-2402-4782-a635-0bed11e51298_rw_1920.png',
+        '../assets/portfolio/Matan card game/c24637e7-e8a6-48c2-af51-d49078b0078a_rw_1920.png'
+    ],
+    'oz': [
+        '../assets/portfolio/Oz/Son of Oz 2.png'
+    ],
+    'proyectile': [
+        '../assets/portfolio/Proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png',
+        '../assets/portfolio/Proyectile/2441a960-6e29-44d6-97b9-bd4cfe716609_rw_1920.png',
+        '../assets/portfolio/Proyectile/4beae567-0a09-4ad7-9e35-224f178d2d32_rw_1920.png',
+        '../assets/portfolio/Proyectile/75471a91-bac5-48c8-bdea-5f41dd833554_rw_1920.png',
+        '../assets/portfolio/Proyectile/Ilustración91.png'
+    ],
+    'selena-ii': [
+        '../assets/portfolio/Selena II/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png',
+        '../assets/portfolio/Selena II/c07c104e-67a6-4b9a-93f2-669084f0d22b_rw_1920.jpg',
+        '../assets/portfolio/Selena II/Cover 2 - RGB.png',
+        '../assets/portfolio/Selena II/cover 2 front.png'
+    ],
+    'selena-magica-somnia': [
+        '../assets/portfolio/Selena Magica Somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png',
+        '../assets/portfolio/Selena Magica Somnia/225fb095-23cc-42e6-b6f7-6745473354d4_rw_1920.png',
+        '../assets/portfolio/Selena Magica Somnia/Concept 1.jpg',
+        '../assets/portfolio/Selena Magica Somnia/Concept 2.jpg',
+        '../assets/portfolio/Selena Magica Somnia/Concept 3.jpg',
+        '../assets/portfolio/Selena Magica Somnia/Concept 4.jpg',
+        '../assets/portfolio/Selena Magica Somnia/Cover 1 21X16.png',
+        '../assets/portfolio/Selena Magica Somnia/e354dfe8-c88f-44f2-b8e7-24c4fb0b004f_rw_1920.jpg'
+    ]
+};
+</script>
+</body>
+</html>
