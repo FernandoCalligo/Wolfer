@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/favicon-32x32.png" type="image/x-icon">
-    <title>WolferDraw - Ilustrator</title>
+    <title>Tomás Vinco - Ilustrator</title>
     <style>
         body {
             box-sizing: border-box;
@@ -64,6 +64,121 @@
             color: #667eea;
         }
 
+        /* Hero Carousel */
+        #hero-carousel {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 999;
+            overflow: hidden;
+            background: #2d3748;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s;
+        }
+
+        #hero-carousel .carousel-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s;
+            z-index: 0;
+        }
+
+        #hero-carousel .carousel-bg.active {
+            opacity: 1;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(80, 40, 20, 0.65);
+            z-index: 1;
+        }
+
+        .carousel-center {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-title {
+            background: rgba(255,255,255,0.97);
+            border-radius: 16px;
+            padding: 2.5rem 3rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.10);
+            max-width: 480px;
+        }
+
+        .carousel-title h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #6c757d;
+            margin: 0.5rem 0 1.5rem 0;
+            letter-spacing: 2px;
+        }
+
+        .carousel-subtitle {
+            font-size: 1.1rem;
+            color: #d97706;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .carousel-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .carousel-links a {
+            color: #6c757d;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+            letter-spacing: 1px;
+        }
+
+        .carousel-links a:hover {
+            color: #d97706;
+        }
+
+        /* Oculta el main-content mientras está el hero */
+        body.carousel-active .main-content {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        body:not(.carousel-active) #hero-carousel {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.carousel-active .navbar {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+body:not(.carousel-active) .navbar {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s;
+}
+
         /* Main Content */
         .main-content {
             padding: 2rem;
@@ -112,101 +227,75 @@
         /* Gallery Grid */
         .gallery {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 200px;
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
             padding: 2rem 0;
         }
 
         .gallery-item {
-            background: white;
-            border-radius: 12px;
+            aspect-ratio: 3/4;
+            background: #fff;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.10);
             cursor: pointer;
             position: relative;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .gallery-item.huge {
-            grid-column: span 2;
-            grid-row: span 4;
-        }
-
-        .gallery-item.large {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .gallery-item.tall {
-            grid-row: span 2;
-        }
-
-        .gallery-item.wide {
-            grid-column: span 2;
+            display: flex;
+            align-items: stretch;
+            transition: box-shadow 0.3s, transform 0.3s;
+            min-height: 0;
         }
 
         .gallery-content {
-            padding: 0;
-            height: 100%;
-            min-height: 200px;
-            min-width: 100%;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-start;
-            text-align: left;
+            height: 100%;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            border: none;
             position: relative;
-            box-sizing: border-box;
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
         }
 
         .gallery-content::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(30,30,30,0.7) 60%, rgba(30,30,30,0.0) 100%);
+            background: rgba(30,30,30,0.0);
+            transition: background 0.3s;
             z-index: 1;
         }
 
-        .gallery-content h3 {
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin: 0 0 0.3rem 0;
+        .gallery-item:hover .gallery-content::before {
+            background: rgba(30,30,30,0.6);
+        }
+
+        .project-title {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+            font-size: 1.6rem;
+            font-weight: 700;
+            opacity: 0;
             z-index: 2;
-            padding-left: 1.2rem;
-            padding-right: 1.2rem;
-            padding-top: 0.7rem;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            text-align: center;
+            padding: 0.5rem 1.5rem;
+            border-radius: 10px;
+            letter-spacing: 1px;
         }
 
+        .gallery-item:hover .project-title {
+            opacity: 1;
+        }
+
+        .gallery-content h3,
         .gallery-content p {
-            font-size: 1rem;
-            opacity: 0.95;
-            color: #e0e0e0;
-            margin: 0 0 1.2rem 0;
-            z-index: 2;
-            padding-left: 1.2rem;
-            padding-right: 1.2rem;
-            padding-bottom: 0.7rem;
-        }
-
-        .gallery-item,
-        .gallery-item.large .gallery-content,
-        .gallery-item.tall .gallery-content,
-        .gallery-item.wide .gallery-content {
-            height: 100%;
-            min-height: 200px;
+            display: none;
         }
 
         /* About Section */
@@ -332,184 +421,148 @@
             background: #4a5568;
         }
 
-        .project-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+       .project-images {
+            display: flex;
+            flex-direction: column;
             gap: 2rem;
+            align-items: center;
+            width: 100%;
         }
 
-        .project-image {
-            background: #f8f9fa;
+        .project-img-full {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
             border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid #e9ecef;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            object-fit: contain;
+            cursor: zoom-in;
+            background: #f8f9fa;
         }
 
-        .project-image svg {
-            width: 80px;
-            height: 80px;
-            color: #6c757d;
-            margin-bottom: 1rem;
+        .project-image[style*="background-image"] {
+            background-size: cover !important;
+            background-position: center !important;
+            min-height: 300px;
+            height: auto;
+            aspect-ratio: 16/9;
         }
 
-        /* Image Overlay for project images */
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.9);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: #2d3748;
-        }
-
-        .image-overlay h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
         /* Responsive */
-        @media (max-width: 768px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            .gallery-item,
-            .gallery-item.huge,
-            .gallery-item.large,
-            .gallery-item.tall,
-            .gallery-item.wide {
-                grid-column: span 1 !important;
-                grid-row: span 1 !important;
-            }
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-item.large,
-            .gallery-item.wide {
-                grid-column: span 1;
-            }
-
-            .about-content {
-                padding: 2rem;
-            }
-            .project-images {
-        grid-template-columns: 1fr !important;
+        @media (max-width: 1024px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+@media (max-width: 700px) {
+    .gallery {
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
-    .project-image {
-        padding: 1rem;
-        min-width: 0;
-        width: 100%;
-        box-sizing: border-box;
-    }
-        }
+}
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">Mi Portafolio</a>
-            <ul class="nav-links">
+        <div class="nav-container" style="justify-content: center;">
+            <ul class="nav-links" style="margin: 0 auto;">
                 <li><a href="#" onclick="showSection('proyectos')" class="active">Proyectos</a></li>
                 <li><a href="#" onclick="showSection('about')">Acerca de mí</a></li>
             </ul>
         </div>
     </nav>
+    <!-- Hero Carousel Background -->
+    <div id="hero-carousel">
+        <div class="carousel-overlay"></div>
+        <div class="carousel-center">
+            <div class="carousel-title">
+                <span class="carousel-subtitle" style="text-transform: uppercase;">Illustrator and conceptual artist</span>
+                <h1>TOMÁS V</h1>
+                <div class="carousel-links">
+                    <a href="#" onclick="showSection('proyectos')">Proyectos</a>
+                    <a href="#" onclick="showSection('about')">Acerca de mí</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="main-content">
         <div class="container">
             <!-- Hero Section -->
             <div class="hero">
-                <h1>WolferDraw</h1>
-                <p>Ilustrador Creativo</p>
-                <p style="margin-top: 0.5rem; opacity: 0.6;">Transformando ideas en arte visual con pasión y creatividad</p>
+                <h1>Tomás V</h1>
+                <p style="color: #d97706; text-transform: uppercase;">Illustrator and conceptual artist</p>
             </div>
 
             <!-- Projects Section -->
             <div id="proyectos" class="section active">
                 <div class="gallery">
                     <!-- Ejemplo de cambio en la galería -->
-                    <div class="gallery-item huge" onclick="showProject('creatures')">
+                    <div class="gallery-item" onclick="showProject('creatures')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Creatures/Xolotl/Ilustración83.png');">
-                            <h3>Creatures</h3>
+                            <span class="project-title">Surprise</span>
                         </div>
                     </div>
 
-                    <div class="gallery-item tall" onclick="showProject('dragon')">
+                    <div class="gallery-item" onclick="showProject('kitsune')">
+                        <div class="gallery-content" style="background-image: url('assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png');">
+                            <span class="project-title">Kitsune</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item" onclick="showProject('dragon')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Dragon/Dragon.png');">
-                            <h3>Dragon</h3>
+                            <span class="project-title">Dragon</span>
                         </div>
                     </div>
 
-                    <div class="gallery-item tall" onclick="showProject('explorer')">
+                    <div class="gallery-item" onclick="showProject('explorer')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Explorer/Ilustración78.jpg');">
-                            <h3>Explorer</h3>
+                            <span class="project-title">Explorer</span>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('forging-mann')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Forging mann/coverex.png');">
-                            <h3>Forging Mann</h3>
+                            <span class="project-title">Forging Mann</span>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('oma')">
-                        <div class="gallery-content" style="background-image: url('assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg');">
-                            <h3>Oma</h3>
+                        <div class="gallery-content" style="background-image: url('assets/portfolio/Oma/5137db57-c4e7-4099-8068-841ccfabbcaf_rw_1920.png');">
+                            <span class="project-title">Oma</span>
                         </div>
                     </div>
                     
-                    <div class="gallery-item wide" onclick="showProject('matan-card-game')">
+                    <div class="gallery-item" onclick="showProject('matan-card-game')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg');">
-                            <h3>Matan Card Game</h3>
+                            <span class="project-title">Atlas Conquest Works</span>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('oz')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Oz/sonofoz2.png');">
-                            <h3>Oz</h3>
+                            <span class="project-title">Oz</span>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('proyectile')">
-                        <div class="gallery-content" style="background-image: url('assets/portfolio/Proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png');">
-                            <h3>Proyectile</h3>
+                        <div class="gallery-content" style="background-image: url('assets/portfolio/Proyectile/Ilustración91.png');">
+                            <span class="project-title">Proyectile</span>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('selena-ii')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Selena II/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png');">
-                            <h3>Selena II</h3>
+                            <span class="project-title">Selena II</span>
                         </div>
                     </div>
 
                     <div class="gallery-item" onclick="showProject('selena-magica-somnia')">
                         <div class="gallery-content" style="background-image: url('assets/portfolio/Selena Magica Somnia/114bda12-5ce7-4cc9-98d7-02bf3a196b6d_rw_1920.png');">
-                            <h3>Selena Magica Somnia</h3>
+                            <span class="project-title">Selena Magica Somnia</span>
                         </div>
                     </div>
                 </div>
@@ -528,9 +581,11 @@
                     </div>
                     
                     <div class="about-text">
-                        <p>Soy un ilustrador apasionado con más de 5 años de experiencia creando arte visual que cuenta historias. Mi trabajo se centra en la ilustración digital, el concept art y el diseño de personajes, siempre buscando transmitir emociones a través del color y la forma.</p>
+                        <p>Hi, I'm Tomás, illustrator and conceptual artist.
+                        I work mainly with characters, creatures and backgrounds related to fantasy and science fiction.</p>
                         
-                        <p>Me especializo en técnicas mixtas que combinan lo tradicional con lo digital, creando piezas únicas que capturan la imaginación del espectador. Cada proyecto es una oportunidad para explorar nuevas narrativas visuales.</p>
+                        <p>I work mainly with board games, role playing games, books and indie game projects.
+                        Also, I have a degree in visual arts from the UNA (National University of Art Argentina).</p>
                     </div>
 
                     <div class="skills">
@@ -659,13 +714,15 @@
             'assets/portfolio/Creatures/Fenix/Fenix.png',
             'assets/portfolio/Creatures/Fenix/Ilustración106.jpg',
             'assets/portfolio/Creatures/Fenix/Proyecto.jpg',
-            'assets/portfolio/Creatures/Kitsune/46128039-bb1e-4390-aa15-1605a476b11f_rw_1920.jpg',
-            'assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
-            'assets/portfolio/Creatures/Kitsune/a12eb426-146e-4ca2-a4d8-a0f7ee2087ae_rw_3840.jpg',
-            'assets/portfolio/Creatures/Kitsune/bbd4ea0d-dcf6-4f82-b613-9eb12b00370f_rw_3840.jpg',
             'assets/portfolio/Creatures/Xolotl/Ilustración83.png',
             'assets/portfolio/Creatures/Xolotl/354521dd-5db2-45bf-b07a-c8c0c15d5f07_rw_3840.jpg',
             'assets/portfolio/Creatures/Xolotl/9357e301-aae3-4a0b-982a-01b6b1bfaa89_rw_3840.jpg'
+        ],
+        'kitsune': [
+            'assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
+            'assets/portfolio/Creatures/Kitsune/a12eb426-146e-4ca2-a4d8-a0f7ee2087ae_rw_3840.jpg',
+            'assets/portfolio/Creatures/Kitsune/bbd4ea0d-dcf6-4f82-b613-9eb12b00370f_rw_3840.jpg',
+            'assets/portfolio/Creatures/Kitsune/46128039-bb1e-4390-aa15-1605a476b11f_rw_1920.jpg',
         ],
         'dragon': [
             'assets/portfolio/Dragon/Dragon.png',
@@ -683,15 +740,15 @@
             'assets/portfolio/Forging mann/mockup.png'
         ],
         'oma': [
-            'assets/portfolio/Oma/3da1a9fb-a5f2-49df-96e2-520aede16963_rw_1920.jpg',
-            'assets/portfolio/Oma/4f68f532-1494-4e7b-8903-ee7d37d2a8da_rw_1920.png',
             'assets/portfolio/Oma/5137db57-c4e7-4099-8068-841ccfabbcaf_rw_1920.png',
+            'assets/portfolio/Oma/4f68f532-1494-4e7b-8903-ee7d37d2a8da_rw_1920.png',
             'assets/portfolio/Oma/5c939020-adeb-41a7-aea9-2cbcc316e356_rw_1920.jpg',
             'assets/portfolio/Oma/65299efd-bd0f-4e61-a765-a99efe14c9bd_rw_1920.jpg',
+            'assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg',
+            'assets/portfolio/Oma/3da1a9fb-a5f2-49df-96e2-520aede16963_rw_1920.jpg',
+            'assets/portfolio/Oma/a1fcf6eb-1ad6-44da-a6e5-6da3d0be8e8a_rw_1920.jpg',
             'assets/portfolio/Oma/75093e8e-dd14-42dc-ae80-917dba110981_rw_1920.jpg',
             'assets/portfolio/Oma/87aaf6f8-5784-40f7-8ae2-d5f656dbffc4_rw_1920.jpg',
-            'assets/portfolio/Oma/a1fcf6eb-1ad6-44da-a6e5-6da3d0be8e8a_rw_1920.jpg',
-            'assets/portfolio/Oma/f983f345-8e5a-4a39-aee5-8d2291114558_rw_1920.jpg'
         ],
         'matan-card-game': [
             'assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg',
@@ -704,11 +761,11 @@
             'assets/portfolio/Oz/sonofoz2.png'
         ],
         'proyectile': [
+            'assets/portfolio/Proyectile/Ilustración91.png',
             'assets/portfolio/Proyectile/0d8ca9bf-49a6-43e3-8f07-3c1a240d851e_rw_1920.png',
-            'assets/portfolio/Proyectile/2441a960-6e29-44d6-97b9-bd4cfe716609_rw_1920.png',
             'assets/portfolio/Proyectile/4beae567-0a09-4ad7-9e35-224f178d2d32_rw_1920.png',
             'assets/portfolio/Proyectile/75471a91-bac5-48c8-bdea-5f41dd833554_rw_1920.png',
-            'assets/portfolio/Proyectile/Ilustración91.png'
+            'assets/portfolio/Proyectile/2441a960-6e29-44d6-97b9-bd4cfe716609_rw_1920.png',
         ],
         'selena-ii': [
             'assets/portfolio/Selena II/2b1ca739-ace5-4bc2-97c1-4fc7cf18caa5_rw_1920.png',
@@ -727,6 +784,52 @@
             'assets/portfolio/Selena Magica Somnia/e354dfe8-c88f-44f2-b8e7-24c4fb0b004f_rw_1920.jpg'
         ]
     };
+
+    const carouselImages = [
+        'assets/portfolio/Creatures/Xolotl/Ilustración83.png',
+        'assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
+        'assets/portfolio/Oz/sonofoz2.png',
+        'assets/portfolio/Dragon/Dragon.png',
+        'assets/portfolio/Explorer/Ilustración78.jpg',
+        'assets/portfolio/Oma/5137db57-c4e7-4099-8068-841ccfabbcaf_rw_1920.png',
+        'assets/portfolio/Matan card game/28b83b2b-0e98-4cba-818f-7ada63a31525_rw_1920.jpg'
+    ];
+
+    const heroCarousel = document.getElementById('hero-carousel');
+    let carouselIndex = 0;
+
+    // Crea los fondos
+    carouselImages.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'carousel-bg' + (i === 0 ? ' active' : '');
+        heroCarousel.appendChild(img);
+    });
+
+    function nextCarouselBg() {
+        const bgs = document.querySelectorAll('#hero-carousel .carousel-bg');
+        bgs.forEach(bg => bg.classList.remove('active'));
+        carouselIndex = (carouselIndex + 1) % bgs.length;
+        bgs[carouselIndex].classList.add('active');
+    }
+    setInterval(nextCarouselBg, 3500);
+
+    // Oculta el hero y muestra el contenido al hacer scroll/click/enlace
+    function hideHeroCarousel() {
+        document.body.classList.remove('carousel-active');
+    }
+    document.body.classList.add('carousel-active');
+    document.querySelectorAll('.carousel-links a').forEach(a => {
+        a.onclick = function(e) {
+            e.preventDefault();
+            hideHeroCarousel();
+            if (this.textContent.includes('Proyectos')) showSection('proyectos');
+            else showSection('about');
+        };
+    });
+    /* window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) hideHeroCarousel();
+    }); */
 
     function showSection(sectionId) {
         const sections = document.querySelectorAll('.section');
@@ -756,7 +859,7 @@
             if (images && projectSection.querySelector('.project-images')) {
                 const imagesContainer = projectSection.querySelector('.project-images');
                 imagesContainer.innerHTML = images.map(src => `
-                    <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
+                    <img class="project-img-full" src="${src}" alt="" onclick="openImageModal('${src}')">
                 `).join('');
                 addImageClickListeners();
             }
@@ -839,7 +942,7 @@ function showGenericProject(projectId) {
         let imagesHtml = '';
         if (images && images.length > 0) {
             imagesHtml = images.map(src => `
-                <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
+                <img class="project-img-full" src="${src}" alt="" onclick="openImageModal('${src}')">
             `).join('');
         } else {
             imagesHtml = `
