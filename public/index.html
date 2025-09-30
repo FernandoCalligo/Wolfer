@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio - Ilustrador</title>
+    <link rel="shortcut icon" href="./assets/favicon-32x32.png" type="image/x-icon">
+    <title>WolferDraw - Ilustrator</title>
     <style>
         body {
             box-sizing: border-box;
@@ -646,12 +647,18 @@
         </div>
     </div>
 
+    <!-- Modal para imagen ampliada -->
+<div id="image-modal" style="display:none; position:fixed; z-index:2000; top:0; left:0; width:100vw; height:100vh; background:rgba(30,30,30,0.95); justify-content:center; align-items:center;">
+    <span id="close-modal" style="position:absolute; top:2rem; right:2rem; font-size:2.5rem; color:#fff; cursor:pointer;">&times;</span>
+    <img id="modal-img" src="" alt="Imagen ampliada" style="max-width:90vw; max-height:90vh; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.3);">
+</div>
+
     <script>
     const projectImages = {
         'creatures': [
             'assets/portfolio/Creatures/Fenix/Fenix.png',
             'assets/portfolio/Creatures/Fenix/Ilustración106.jpg',
-            'assets/portfolio/Creatures/Fenix/Proyecto (20240513060316).jpg',
+            'assets/portfolio/Creatures/Fenix/Proyecto.jpg',
             'assets/portfolio/Creatures/Kitsune/46128039-bb1e-4390-aa15-1605a476b11f_rw_1920.jpg',
             'assets/portfolio/Creatures/Kitsune/5e1877f1-13f4-444f-aaca-00d5ec59571a_rw_3840.png',
             'assets/portfolio/Creatures/Kitsune/a12eb426-146e-4ca2-a4d8-a0f7ee2087ae_rw_3840.jpg',
@@ -751,6 +758,7 @@
                 imagesContainer.innerHTML = images.map(src => `
                     <div class="project-image" style="background-image: url('${src}'); background-size: cover; background-position: center;"></div>
                 `).join('');
+                addImageClickListeners();
             }
             projectSection.classList.add('active');
         } else {
@@ -758,7 +766,46 @@
         }
     }
 
-    function showGenericProject(projectId) {
+    // Modal de imagen
+const imageModal = document.getElementById('image-modal');
+const modalImg = document.getElementById('modal-img');
+const closeModal = document.getElementById('close-modal');
+
+function openImageModal(src) {
+    modalImg.src = src;
+    imageModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+closeModal.onclick = function() {
+    imageModal.style.display = 'none';
+    modalImg.src = '';
+    document.body.style.overflow = '';
+};
+
+imageModal.onclick = function(e) {
+    if (e.target === imageModal) {
+        imageModal.style.display = 'none';
+        modalImg.src = '';
+        document.body.style.overflow = '';
+    }
+};
+
+// Añade el evento a las imágenes de los proyectos
+function addImageClickListeners() {
+    document.querySelectorAll('.project-image').forEach(imgDiv => {
+        const style = imgDiv.getAttribute('style');
+        if (style && style.includes('background-image')) {
+            const match = style.match(/url\(['"]?([^'")]+)['"]?\)/);
+            if (match && match[1]) {
+                imgDiv.onclick = () => openImageModal(match[1]);
+                imgDiv.style.cursor = 'zoom-in';
+            }
+        }
+    });
+}
+
+function showGenericProject(projectId) {
         const sections = document.querySelectorAll('.section');
         sections.forEach(section => {
             section.classList.remove('active');
@@ -832,6 +879,7 @@
             </div>
         `;
         genericSection.classList.add('active');
+        addImageClickListeners();
     }
     </script>
 </body>
